@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jogo da Velha | Mostra Campus</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="topo">
+        <div class="topo-logo">
+            <a href="index.html" class="topo-logo-link">
+                <div class="topo-pin">
+                    <img src="pin-mostra-campus.png" alt="Pin Mostra Campus">
+                </div>
+                <div class="topo-logo-nome">
+                    <img src="logo-mostra-campus.png" alt="Mostra Campus">
+                </div>
+            </a>
+        </div>
+
+        <nav class="menu" aria-label="Menu">
+            <a class="menu-item ativo" href="index.html">Início</a>
+            <a class="menu-item" href="sobre.html">Sobre o curso</a>
+        </nav>
+
+        <span class="selo">Análise e Desenvolvimento de Sistemas</span>
+
+        <svg class="topo-onda" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="#ffd000" d="M0 16C180 42 340 4 520 18c190 16 300-24 500 2 140 18 280 8 420-6v34H0z" />
+        </svg>
+    </header>
+
+    <main class="pagina">
+        <aside class="coluna-esquerda">
+            <h2 class="chamada">
+                Que tal conectar<br>
+                seus alunos a um<br>
+                <span class="destaque">futuro profissional</span><br>
+                de sucesso?
+            </h2>
+
+            <p class="experiencia">
+                Uma experiência<br>
+                incrível espera<br>
+                por vocês!
+            </p>
+        </aside>
+
+        <section class="coluna-centro">
+            <h1 class="titulo">
+                Jogo <span>da</span> Velha
+            </h1>
+            <p class="subtitulo">Estratégia também conecta você ao futuro!</p>
+
+            <p class="escolha-texto">Clique em X ou O. O símbolo que sobrar fica com o computador.</p>
+
+            <div class="escolhas">
+                <button type="button" id="escolher-x">Jogar com X</button>
+                <button type="button" id="escolher-o">Jogar com O</button>
+            </div>
+
+            <p id="info">Nenhum símbolo escolhido ainda.</p>
+
+            <div class="tabuleiro-caixa">
+                <div class="tabuleiro">
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                    <button type="button" class="casa"></button>
+                </div>
+            </div>
+
+            <p id="mensagem">Escolha X ou O para começar</p>
+
+            <button type="button" id="reiniciar">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 13c0-4.42-3.58-8-8-8zm-5.3 3.2L5.24 6.74A7.93 7.93 0 0 0 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8z" />
+                </svg>
+                Reiniciar jogo
+            </button>
+        </section>
+    </main>
+
+    <p class="rodape-esquerda">UNINASSAU CARUARU -<br>MOSTRA CAMPUS 2026.2</p>
+    <p class="rodape-direita">Desenvolvido pelas turmas de ADS<br>da Uninassau Caruaru</p>
+
+    <div id="alerta-vitoria" class="alerta" aria-hidden="true">
+        <div class="alerta-caixa">
+            <h2>Parabéns!</h2>
+            <p>Você venceu o jogo da velha!</p>
+            <button type="button" id="alerta-reiniciar">Reiniciar jogo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
