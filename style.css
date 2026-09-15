@@ -113,7 +113,7 @@ body {
 }
 
 .selo {
-    background: rgba(244, 61, 140, 0.75);
+    background: var(--rosa);
     color: #fff;
     padding: 5px 12px;
     border-radius: 999px;
@@ -122,7 +122,6 @@ body {
     line-height: 1.2;
     letter-spacing: 0.2px;
     white-space: nowrap;
-    opacity: 0.9;
 }
 
 .pagina {
