@@ -16,16 +16,14 @@
 <body>
 
     <header class="topo">
-        <div class="topo-logo">
-            <a href="index.html" class="topo-logo-link">
-                <div class="topo-pin">
-                    <img src="pin-mostra-campus.png" alt="Pin Mostra Campus">
-                </div>
-                <div class="topo-logo-nome">
-                    <img src="logo-mostra-campus.png" alt="Mostra Campus">
-                </div>
-            </a>
-        </div>
+        <a href="index.html" class="topo-logo-link">
+            <div class="topo-pin">
+                <img src="pin-mostra-campus.png" alt="Pin Mostra Campus">
+            </div>
+            <div class="topo-logo-nome">
+                <img src="logo-mostra-campus.png" alt="Mostra Campus">
+            </div>
+        </a>
 
         <nav class="menu" aria-label="Menu">
             <a class="menu-item ativo" href="index.html">Início</a>
@@ -42,16 +40,15 @@
     <main class="pagina">
         <aside class="coluna-esquerda">
             <h2 class="chamada">
-                Que tal conectar<br>
-                seus alunos a um<br>
-                <span class="destaque">futuro profissional</span><br>
-                de sucesso?
+                Tecnologia também<br>
+                pode ser <span class="destaque">diversão</span>.<br>
+                Aceita o desafio?
             </h2>
 
             <p class="experiencia">
-                Uma experiência<br>
-                incrível espera<br>
-                por vocês!
+                Teste sua estratégia<br>
+                contra o nosso jogo<br>
+                da velha imbatível!
             </p>
         </aside>
 
@@ -61,14 +58,15 @@
             </h1>
             <p class="subtitulo">Estratégia também conecta você ao futuro!</p>
 
-            <p class="escolha-texto">Clique em X ou O. O símbolo que sobrar fica com o computador.</p>
+            <p class="escolha-texto">Escolha seu nome, o símbolo e depois inicie o jogo.</p>
 
             <div class="escolhas">
+                <button type="button" id="escolher-nome">Escolher nome</button>
                 <button type="button" id="escolher-x">Jogar com X</button>
                 <button type="button" id="escolher-o">Jogar com O</button>
             </div>
 
-            <p id="info">Nenhum símbolo escolhido ainda.</p>
+            <p id="info">Escolha um nome e um símbolo para começar.</p>
 
             <div class="tabuleiro-caixa">
                 <div class="tabuleiro">
@@ -84,15 +82,34 @@
                 </div>
             </div>
 
-            <p id="mensagem">Escolha X ou O para começar</p>
+            <p id="mensagem">Escolha o nome, o símbolo e clique em Iniciar jogo</p>
 
-            <button type="button" id="reiniciar">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 13c0-4.42-3.58-8-8-8zm-5.3 3.2L5.24 6.74A7.93 7.93 0 0 0 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8z" />
-                </svg>
-                Reiniciar jogo
-            </button>
+            <div class="acoes">
+                <button type="button" id="iniciar">Iniciar jogo</button>
+                <button type="button" id="reiniciar">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 13c0-4.42-3.58-8-8-8zm-5.3 3.2L5.24 6.74A7.93 7.93 0 0 0 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8z" />
+                    </svg>
+                    Reiniciar jogo
+                </button>
+                <button type="button" id="novo-jogo">Novo Jogo</button>
+            </div>
         </section>
+
+        <aside class="coluna-direita">
+            <div class="temporizador" id="caixa-tempo">
+                <p class="temporizador-titulo">Tempo</p>
+                <p id="tempo">0:15</p>
+                <p class="temporizador-texto">para vencer o desafio</p>
+            </div>
+
+            <div class="ranking" id="caixa-ranking">
+                <p class="ranking-titulo">Ranking</p>
+                <p class="ranking-texto">Só entra quem venceu</p>
+                <ol id="lista-ranking"></ol>
+                <p class="ranking-vazio" id="ranking-vazio">Nenhum vencedor ainda.</p>
+            </div>
+        </aside>
     </main>
 
     <p class="rodape-esquerda">UNINASSAU CARUARU -<br>MOSTRA CAMPUS 2026.2</p>
@@ -100,9 +117,22 @@
 
     <div id="alerta-vitoria" class="alerta" aria-hidden="true">
         <div class="alerta-caixa">
-            <h2>Parabéns!</h2>
-            <p>Você venceu o jogo da velha!</p>
-            <button type="button" id="alerta-reiniciar">Reiniciar jogo</button>
+            <h2 id="alerta-titulo">Parabéns!</h2>
+            <p id="alerta-texto">Você venceu o jogo da velha!</p>
+            <div class="alerta-acoes">
+                <button type="button" id="alerta-reiniciar">Reiniciar jogo</button>
+                <button type="button" id="alerta-novo-jogo">Novo Jogo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="alerta-nome" class="alerta" aria-hidden="true">
+        <div class="alerta-caixa">
+            <h2>Seu nome</h2>
+            <p>Digite como você quer aparecer no ranking.</p>
+            <label class="campo-nome" for="campo-nome">Nome do jogador</label>
+            <input type="text" id="campo-nome" maxlength="16" placeholder="Ex: Ana">
+            <button type="button" id="salvar-nome">Salvar nome</button>
         </div>
     </div>
 
