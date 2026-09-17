@@ -101,6 +101,10 @@ campoNome.addEventListener("keydown", function (evento) {
 });
 
 function escolherSimbolo(simbolo) {
+    if (jogador !== "") {
+        return;
+    }
+
     jogador = simbolo;
 
     if (simbolo === "X") {
@@ -112,6 +116,9 @@ function escolherSimbolo(simbolo) {
         botaoO.classList.add("escolhido");
         botaoX.classList.remove("escolhido");
     }
+
+    botaoX.disabled = true;
+    botaoO.disabled = true;
 
     atualizarInfo();
 
@@ -183,13 +190,7 @@ function iniciarJogo() {
     limparTabuleiro();
     jogoComecou = true;
     iniciarTemporizador();
-
-    // X sempre começa
-    if (jogador === "X") {
-        mensagem.textContent = "Sua vez!";
-    } else {
-        chamarComputador();
-    }
+    mensagem.textContent = "Sua vez!";
 }
 
 function fazerJogada(indice) {
@@ -509,6 +510,8 @@ function novoJogo() {
     botaoX.classList.remove("escolhido");
     botaoO.classList.remove("escolhido");
     botaoNome.classList.remove("escolhido");
+    botaoX.disabled = false;
+    botaoO.disabled = false;
 
     fecharAlertaNome();
     atualizarInfo();
