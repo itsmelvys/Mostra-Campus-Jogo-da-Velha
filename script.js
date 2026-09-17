@@ -21,7 +21,8 @@ const listaRanking = document.querySelector("#lista-ranking");
 const textoRankingVazio = document.querySelector("#ranking-vazio");
 
 const TEMPO_MAXIMO = 15;
-const chaveRanking = "rankingJogoDaVelha";
+const chaveRanking = "rankingJogoDaVelhaMostra";
+const limpezaRanking = "4";
 
 let tabuleiro = ["", "", "", "", "", "", "", "", ""];
 let jogador = "";
@@ -246,7 +247,7 @@ function jogadaComputador() {
 
     vezDoComputador = false;
 
-    let indice = escolherCasaDoComputador();
+    let indice = melhorJogadaMinimax();
 
     if (indice === -1) {
         return;
@@ -271,34 +272,72 @@ function jogadaComputador() {
     mensagem.textContent = "Sua vez!";
 }
 
-function escolherCasaDoComputador() {
+function melhorJogadaMinimax() {
+    let melhorPontuacao = -1000;
+    let jogada = -1;
+
     for (let i = 0; i < tabuleiro.length; i++) {
         if (tabuleiro[i] === "") {
             tabuleiro[i] = computador;
-
-            if (verificarVencedor(computador)) {
-                tabuleiro[i] = "";
-                return i;
-            }
-
+            let pontuacao = minimax(false, 0);
             tabuleiro[i] = "";
+
+            if (pontuacao > melhorPontuacao) {
+                melhorPontuacao = pontuacao;
+                jogada = i;
+            }
         }
     }
 
-    let vazias = [];
+    return jogada;
+}
+
+function minimax(vezDoComp, profundidade) {
+    if (verificarVencedor(computador)) {
+        return 10 - profundidade;
+    }
+
+    if (verificarVencedor(jogador)) {
+        return profundidade - 10;
+    }
+
+    if (verificarEmpate()) {
+        return 0;
+    }
+
+    if (vezDoComp) {
+        let melhor = -1000;
+
+        for (let i = 0; i < tabuleiro.length; i++) {
+            if (tabuleiro[i] === "") {
+                tabuleiro[i] = computador;
+                let pontuacao = minimax(false, profundidade + 1);
+                tabuleiro[i] = "";
+
+                if (pontuacao > melhor) {
+                    melhor = pontuacao;
+                }
+            }
+        }
+
+        return melhor;
+    }
+
+    let pior = 1000;
 
     for (let i = 0; i < tabuleiro.length; i++) {
         if (tabuleiro[i] === "") {
-            vazias.push(i);
+            tabuleiro[i] = jogador;
+            let pontuacao = minimax(true, profundidade + 1);
+            tabuleiro[i] = "";
+
+            if (pontuacao < pior) {
+                pior = pontuacao;
+            }
         }
     }
 
-    if (vazias.length === 0) {
-        return -1;
-    }
-
-    let sorteio = Math.floor(Math.random() * vazias.length);
-    return vazias[sorteio];
+    return pior;
 }
 
 function verificarVencedor(simbolo) {
@@ -481,6 +520,13 @@ function novoJogo() {
 }
 
 function carregarRanking() {
+    localStorage.removeItem("rankingJogoDaVelha");
+
+    if (localStorage.getItem("limpezaRanking") !== limpezaRanking) {
+        localStorage.removeItem(chaveRanking);
+        localStorage.setItem("limpezaRanking", limpezaRanking);
+    }
+
     let salvo = localStorage.getItem(chaveRanking);
 
     if (salvo === null) {
