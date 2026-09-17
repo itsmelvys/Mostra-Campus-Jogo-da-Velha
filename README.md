@@ -13,14 +13,14 @@ O projeto conta com duas páginas principais:
 
 No jogo, o visitante informa seu nome, escolhe entre **X** ou **O** e tem 15 segundos para tentar vencer o computador.
 
-O adversário utiliza o algoritmo **Minimax** para analisar as possibilidades do tabuleiro e escolher suas jogadas.
+O computador joga de forma simples: se puder ganhar na hora, ele ganha; senão, escolhe uma casa vazia. Assim o visitante consegue vencer e entrar no ranking.
 
 ## Funcionalidades
 
 - Identificação do jogador;
 - Escolha entre X e O;
 - Partidas contra o computador;
-- Algoritmo Minimax para as jogadas do adversário;
+- Jogadas simples do computador, para o visitante poder vencer;
 - Cronômetro de 15 segundos;
 - Avisos de vitória, derrota e empate;
 - Ranking com os 10 melhores vencedores;
