@@ -246,7 +246,7 @@ function jogadaComputador() {
 
     vezDoComputador = false;
 
-    let indice = melhorJogadaMinimax();
+    let indice = escolherCasaDoComputador();
 
     if (indice === -1) {
         return;
@@ -271,72 +271,34 @@ function jogadaComputador() {
     mensagem.textContent = "Sua vez!";
 }
 
-function melhorJogadaMinimax() {
-    let melhorPontuacao = -1000;
-    let jogada = -1;
-
+function escolherCasaDoComputador() {
     for (let i = 0; i < tabuleiro.length; i++) {
         if (tabuleiro[i] === "") {
             tabuleiro[i] = computador;
-            let pontuacao = minimax(false, 0);
-            tabuleiro[i] = "";
 
-            if (pontuacao > melhorPontuacao) {
-                melhorPontuacao = pontuacao;
-                jogada = i;
-            }
-        }
-    }
-
-    return jogada;
-}
-
-function minimax(vezDoComp, profundidade) {
-    if (verificarVencedor(computador)) {
-        return 10 - profundidade;
-    }
-
-    if (verificarVencedor(jogador)) {
-        return profundidade - 10;
-    }
-
-    if (verificarEmpate()) {
-        return 0;
-    }
-
-    if (vezDoComp) {
-        let melhor = -1000;
-
-        for (let i = 0; i < tabuleiro.length; i++) {
-            if (tabuleiro[i] === "") {
-                tabuleiro[i] = computador;
-                let pontuacao = minimax(false, profundidade + 1);
+            if (verificarVencedor(computador)) {
                 tabuleiro[i] = "";
-
-                if (pontuacao > melhor) {
-                    melhor = pontuacao;
-                }
+                return i;
             }
-        }
 
-        return melhor;
+            tabuleiro[i] = "";
+        }
     }
 
-    let pior = 1000;
+    let vazias = [];
 
     for (let i = 0; i < tabuleiro.length; i++) {
         if (tabuleiro[i] === "") {
-            tabuleiro[i] = jogador;
-            let pontuacao = minimax(true, profundidade + 1);
-            tabuleiro[i] = "";
-
-            if (pontuacao < pior) {
-                pior = pontuacao;
-            }
+            vazias.push(i);
         }
     }
 
-    return pior;
+    if (vazias.length === 0) {
+        return -1;
+    }
+
+    let sorteio = Math.floor(Math.random() * vazias.length);
+    return vazias[sorteio];
 }
 
 function verificarVencedor(simbolo) {
