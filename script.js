@@ -272,7 +272,35 @@ function jogadaComputador() {
     mensagem.textContent = "Sua vez!";
 }
 
+function casaQueGanha(simbolo) {
+    for (let i = 0; i < tabuleiro.length; i++) {
+        if (tabuleiro[i] === "") {
+            tabuleiro[i] = simbolo;
+            let ganhou = verificarVencedor(simbolo);
+            tabuleiro[i] = "";
+
+            if (ganhou) {
+                return i;
+            }
+        }
+    }
+
+    return -1;
+}
+
 function melhorJogadaMinimax() {
+    let vitoria = casaQueGanha(computador);
+
+    if (vitoria !== -1) {
+        return vitoria;
+    }
+
+    let bloqueio = casaQueGanha(jogador);
+
+    if (bloqueio !== -1) {
+        return bloqueio;
+    }
+
     let melhorPontuacao = -1000;
     let jogada = -1;
 
